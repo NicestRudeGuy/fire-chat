@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, InputLabel, Button, FormControl, Input } from '@material-ui/core/';
+import { InputLabel, Button, FormControl, Input } from '@material-ui/core/';
 import './App.css';
 import Message from './Components/Message';
 
@@ -17,21 +17,21 @@ function App() {
     setUsername(prompt('Enter your nick name'));
   }, []);
 
-  console.log(username);
-  /*   console.log(input);
-    console.log(messages); */
+  /*
+    console.log(username);
+     console.log(input);
+      console.log(messages); */
 
   const sendMessage = (event) => {
     event.preventDefault();
-    if (!input == "")
-      setMessages([...messages, { username: username, text: input }]);
+    setMessages([...messages, { username: username, text: input }]);
     setInput("");
   }
 
   return (
     <div className="App">
-      <h1>Hello World!</h1>
-      <h2>hello {username}</h2>
+      <h1>Fire Chat 🔥</h1>
+      <h2>Hello {username} 😁</h2>
       <form>
         <FormControl>
           <InputLabel>Enter a message...</InputLabel>
@@ -43,7 +43,7 @@ function App() {
       </form>
       {
         messages.map(message => (
-          <Message username={message.username} text={message.text} />
+          <Message username={username} message={message} />
           /* <p key={id}>{message}</p> */
         ))
       }
