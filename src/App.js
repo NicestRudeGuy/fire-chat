@@ -20,16 +20,17 @@ function App() {
   useEffect(() => {
     setUsername(prompt('Enter your nick name'));
   }, []);
+
+
   /* 
-    console.log(messages); */
-  /*
+   console.log(messages);
     console.log(username);
-     console.log(input);
-     */
+    console.log(input); */
+
 
   const sendMessage = (event) => {
     event.preventDefault();
-    setMessages([...messages, { username: username, text: input }]);
+    setMessages([...messages, { username: username, message: input }]);
     setInput("");
   }
 
@@ -49,7 +50,6 @@ function App() {
       {
         messages.map(message => (
           <Message username={username} message={message} />
-          /* <p key={id}>{message}</p> */
         ))
       }
     </div>
