@@ -5,7 +5,6 @@ import './Message.css';
 function Message({ username, message }) {
     const isUser = username === message.username;
 
-
     return (
         <div className={`message ${isUser && 'messageUser'}`}>
             <Card className={isUser ? 'messageUserCard' : 'messageGuestCard'}>
@@ -14,7 +13,7 @@ function Message({ username, message }) {
                         variant="h5"
                         component="h2"
                     >
-                        {message.username} : {message.text}
+                        {username.username} : {message.message}
                     </Typography>
                 </CardContent>
             </Card>

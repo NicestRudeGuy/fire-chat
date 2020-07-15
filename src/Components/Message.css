@@ -2,6 +2,7 @@
     width: fit-content;
     padding: 10px;
     margin: 10px;
+
 }
 
 .messageUser {
@@ -12,9 +13,12 @@
 }
 
 .messageUserCard {
-    background-color: blue !important;
+    background-color: #FEE715FF !important;
+    color: black !important;
 }
 
 .messageGuestCard {
-    background-color: grey !important;
+    background-color: #6E6E6DFF !important;
+    color: white !important;
+
 }
