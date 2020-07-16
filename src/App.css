@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -7,14 +11,40 @@ body {
   color: white !important;
 }
 
-input {
-  color: white !important;
+.symb {
+  margin: 10px;
+  height: 70px;
+  width: 100px;
+  border-radius: 50%;
+  filter: hue-rotate(90deg) drop-shadow(8px 8px 10px gray);
+  border: white groove 10px;
 }
+
+.frm {
+  width: 98.20%;
+  position: fixed;
+  bottom: 0;
+  padding: 20px;
+  z-index: 1;
+  background-color: #222;
+  border-radius: 7px;
+  margin: 10px;
+}
+
+.frmCtrl {
+  display: flex !important;
+  flex-direction: row !important;
+
+
+}
+
 
 .inp {
   color: white !important;
+  flex: 1;
 }
 
-/* .butt {
-  color: white !important;
-} */
+
+.butt {
+  flex: 0;
+}

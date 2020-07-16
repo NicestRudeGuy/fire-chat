@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { InputLabel, Button, FormControl, Input } from '@material-ui/core/';
+import { FormControl, Input, IconButton } from '@material-ui/core/';
 import './App.css';
 import Message from './Components/Message';
 import db from './Config/Firebase';
+import firebase from 'firebase';
+import Flipmove from 'react-flip-move';
+import SendIcon from '@material-ui/icons/Send';
+
 
 
 function App() {
@@ -12,9 +16,12 @@ function App() {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    db.collection('messages').onSnapshot(snapshot => {
-      setMessages(snapshot.docs.map(doc => doc.data()))
-    })
+    db.collection('messages').orderBy('timestamp', 'desc')
+      .onSnapshot(snapshot => {
+        setMessages(snapshot.docs.map(doc => ({
+          id: doc.id, message: doc.data()
+        })))
+      });
   }, []);
 
   useEffect(() => {
@@ -30,29 +37,41 @@ function App() {
 
   const sendMessage = (event) => {
     event.preventDefault();
-    setMessages([...messages, { username: username, message: input }]);
+    db.collection('messages').add({
+      message: input,
+      username: username,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    /*     setMessages([...messages, { username: username, message: input }]); */
     setInput("");
   }
 
   return (
     <div className="App">
+      <img src="https://media.giphy.com/media/1lDDbtArVOHPrERDf2/giphy.gif" className="symb" alt="infinity" />
       <h1>Fire Chat <span aria-label="fire" role="img">🔥</span></h1>
-      <h2>Hello {username} <span aria-label="smile" role="img">😁</span> </h2>
-      <form>
-        <FormControl>
-          <InputLabel className="inp">Enter a message...</InputLabel>
-          <Input value={input} onChange={event => setInput(event.target.value)}
+      <h3>Hello {username} <span aria-label="smile" role="img">😁</span> </h3>
+      <form className="frm">
+        <FormControl className="frmCtrl">
+          <Input className="inp" placeholder="Enter a msg ..." value={input} onChange={event => setInput(event.target.value)}
             aria-describedby="my-helper-text" />
-          <Button className="butt" disabled={!input} type="submit" onClick={sendMessage}
-            variant="contained" color="primary">Send Msg</Button>
+
+          <IconButton
+            className="butt" disabled={!input} type="submit" onClick={sendMessage}
+            variant="contained" color="primary">
+            <SendIcon />
+          </IconButton>
+
         </FormControl>
       </form>
-      {
-        messages.map(message => (
-          <Message username={username} message={message} />
-        ))
-      }
-    </div>
+      <Flipmove>
+        {
+          messages.map(({ message, id }) => (
+            <Message key={id} username={username} message={message} />
+          ))
+        }
+      </Flipmove>
+    </div >
   );
 }
 
