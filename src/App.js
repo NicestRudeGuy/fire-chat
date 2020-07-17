@@ -9,7 +9,7 @@ import SendIcon from '@material-ui/icons/Send';
 
 
 
-function App() {
+const App = () => {
 
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
@@ -34,6 +34,17 @@ function App() {
     console.log(username);
     console.log(input); */
 
+  const clear = (event) => {
+    event.preventDefault();
+    db.collection('messages').get()
+      .then(res => {
+        res.forEach(element => {
+          element.ref.delete();
+        });
+      });
+    alert("cleared shit");
+  }
+
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -48,7 +59,8 @@ function App() {
 
   return (
     <div className="App">
-      <img src="https://media.giphy.com/media/1lDDbtArVOHPrERDf2/giphy.gif" className="symb" alt="infinity" />
+      <img src="https://media.giphy.com/media/1lDDbtArVOHPrERDf2/giphy.gif"
+        className="symb" alt="infinity" onDoubleClick={clear} />
       <h1>Fire Chat <span aria-label="fire" role="img">🔥</span></h1>
       <h3>Hello {username} <span aria-label="smile" role="img">😁</span> </h3>
       <form className="frm">
