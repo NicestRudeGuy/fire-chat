@@ -21,7 +21,7 @@ body {
 }
 
 .frm {
-  width: 98.20%;
+  width: 98.2%;
   position: fixed;
   bottom: 0;
   padding: 20px;
@@ -34,17 +34,28 @@ body {
 .frmCtrl {
   display: flex !important;
   flex-direction: row !important;
-
-
 }
-
 
 .inp {
   color: white !important;
   flex: 1;
 }
 
-
 .butt {
   flex: 0;
+}
+
+/* On smaller screens, decrease text size */
+@media (max-width: 440px) {
+  .frm {
+    margin: 10px;
+    width: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  .frm {
+    margin: 10px;
+    width: 95%;
+  }
 }
