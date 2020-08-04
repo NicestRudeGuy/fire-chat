@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FormControl, Input, IconButton } from "@material-ui/core/";
 import "./App.css";
 import Message from "./Components/Message";
@@ -11,10 +11,16 @@ const App = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState("");
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
 
   useEffect(() => {
     db.collection("messages")
-      .orderBy("timestamp", "desc")
+      .orderBy("timestamp", "asc")
       .onSnapshot((snapshot) => {
         setMessages(
           snapshot.docs.map((doc) => ({
@@ -99,11 +105,17 @@ const App = () => {
           </IconButton>
         </FormControl>
       </form>
+
       <Flipmove>
+
         {messages.map(({ message, id }) => (
           <Message key={id} username={username} message={message} />
         ))}
+
       </Flipmove>
+
+      <div ref={messagesEndRef} />
+
     </div>
   );
 };
