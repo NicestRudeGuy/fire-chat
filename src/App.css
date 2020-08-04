@@ -49,13 +49,13 @@ body {
 @media (max-width: 440px) {
   .frm {
     margin: 10px;
-    width: 91%;
+    width: 90%;
   }
 }
 
 @media (max-width: 768px) {
   .frm {
     margin: 10px;
-    width: 95%;
+    width: 90%;
   }
 }
