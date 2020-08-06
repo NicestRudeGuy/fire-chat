@@ -72,16 +72,16 @@ const App = () => {
         onDoubleClick={clear}
       />
       <h1>
-        Fire Chat{" "}
+        Fire Chat
         <span aria-label="fire" role="img">
           🔥
         </span>
       </h1>
       <h3>
-        Hello {username}{" "}
+        Hello {username}
         <span aria-label="smile" role="img">
           😁
-        </span>{" "}
+        </span>
       </h3>
       <form className="frm">
         <FormControl className="frmCtrl">
